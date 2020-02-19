@@ -3,7 +3,7 @@
 function checkDuplicate($name, $gameName, $dbi) {
     $sql = "SELECT name, gameName
                 FROM user
-                WHERE name = '" . $name . "'
+                WHERE name = '" . $name  . "'
                 OR gameName = '" . $gameName . "'";
 
     $res = $dbi->query($sql);
