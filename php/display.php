@@ -26,6 +26,7 @@
       echo ' <tr>
          <td>'. $names . '</td>
          <td>'. $gameNames . '</td>
+         <td> <button>Stats</button></td>
        </tr>';
   }
   ?>

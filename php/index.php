@@ -13,9 +13,11 @@ $message = '';
 if (isset($_POST['submit']) && !empty($_POST['submit'])) {
     if (!empty($_POST['name'])) {
         $message = insertName($_POST['name'], $_POST['gameName'], $dbi);
+        // msgNotify($message);
     }
     if (!empty($_POST ['search'])) {
         $message = searchName($_POST['search'], $dbi);
+        // msgNotify($message);
     }
 }
 
