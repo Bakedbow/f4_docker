@@ -1,3 +1,5 @@
+
+<div id="displayDiv" class="tabcontent">
 <table>
   <tr>
     <th>First Name</th>
@@ -10,3 +12,4 @@
   }
   ?>
 </table>
+</div>

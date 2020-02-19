@@ -1,13 +1,21 @@
 <?php
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
+header('Access-Control-Allow-Credentials: true');
+?>
+
+<?php
 include('db.php');
 include('functions.php');
 
+$message = '';
 if (isset($_POST['submit']) && !empty($_POST['submit'])) {
     if (!empty($_POST['name'])) {
-        insertName($_POST['name'], $dbi);
+        $message = insertName($_POST['name'], $dbi);
     }
     if (!empty($_POST ['search'])) {
-        searchName($_POST['search'], $dbi);
+        $message = searchName($_POST['search'], $dbi);
     }
 }
 
@@ -45,6 +53,7 @@ if (isset($_POST['submit']) && !empty($_POST['submit'])) {
 
 include('name.php');
 include('search.php');
+
 $name = [];
 $sql = 'SELECT name
             FROM user';
@@ -53,7 +62,23 @@ $res = $dbi->query($sql);
 while ($row = $res->fetch_assoc()) {
     $name[] = $row['name'];
 }
-
 include('display.php');
 
+
 ?>
+
+<script>
+function openTab  (evt, tabName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(tabName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+</script>
