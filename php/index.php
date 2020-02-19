@@ -4,7 +4,7 @@ header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
 header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
 header('Access-Control-Allow-Credentials: true');
 ?>
- 
+
 <?php
 include('db.php');
 include('functions.php');
@@ -12,7 +12,7 @@ include('functions.php');
 $message = '';
 if (isset($_POST['submit']) && !empty($_POST['submit'])) {
     if (!empty($_POST['name'])) {
-        $message = insertName($_POST['name'], $dbi);
+        $message = insertName($_POST['name'], $_POST['gameName'], $dbi);
     }
     if (!empty($_POST ['search'])) {
         $message = searchName($_POST['search'], $dbi);
@@ -55,12 +55,12 @@ include('name.php');
 include('search.php');
 
 $name = [];
-$sql = 'SELECT name
+$sql = 'SELECT name, gameName
             FROM user';
 
 $res = $dbi->query($sql);
 while ($row = $res->fetch_assoc()) {
-    $name[] = $row['name'];
+    $name[ $row['name']] = $row['gameName'];
 }
 include('display.php');
 

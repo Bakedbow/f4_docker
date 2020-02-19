@@ -1,9 +1,10 @@
 <?php
 
-function checkDuplicate($name, $dbi) {
-    $sql = "SELECT name
+function checkDuplicate($name, $gameName, $dbi) {
+    $sql = "SELECT name, gameName
                 FROM user
-                WHERE name = '" . $name . "'";
+                WHERE name = '" . $name . "'
+                OR gameName = '" . $gameName . "'";
 
     $res = $dbi->query($sql);
     $row = $res->fetch_assoc();
@@ -15,14 +16,14 @@ function checkDuplicate($name, $dbi) {
     }
 }
 
-function insertName($name, $dbi) {
-    $check = checkDuplicate($name, $dbi);
+function insertName($name, $gameName, $dbi) {
+    $check = checkDuplicate($name, $gameName, $dbi);
 
     if ($check) {
         echo '<span style="color: red;"><b>Name already exist in database.</b></span>';
     } else {
-        $sql = "INSERT INTO user (name)
-                    VALUES ('".$name."')";
+        $sql = "INSERT INTO user (name, gameName)
+                    VALUES ('".$name."','" . $gameName . "')";
 
         $res = $dbi->query($sql);
 
@@ -37,15 +38,17 @@ function insertName($name, $dbi) {
 }
 
 function searchName($name, $dbi) {
-    $sql = "SELECT name
+    $sql = "SELECT name, gameName
                 FROM user
-                WHERE name = '" . $name . "'";
+                WHERE name = '" . $name . "'
+                OR gameName = '" . $name . "'";
 
     $res = $dbi->query($sql);
     $row = $res->fetch_assoc();
 
     if (!empty($row)) {
-        return $msg = '<span style="color: green;"><b>Found ' .  $row['name'] . '</b></span>';
+        return $msg = '<span style="color: green;"><b>Real Name - ' .  $row['name'] . '</b></span>
+                                <br><span style="color: green;"><b>Game Name -' . $row['gameName'] . '</b></span>';
     } else {
         return $msg = '<span style="color: red;"><b>Could not find name.</b></span>';
     }

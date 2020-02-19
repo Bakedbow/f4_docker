@@ -23,7 +23,9 @@
 		<div id="nameDiv" class="tabcontent">
 		<form method="post">
 			Name: <br>
-			<input type="text" name="name" placeholder="Enter your name" required/><br />
+			<input type="text" name="name" placeholder="Enter real name" required/><br />
+			Gamer Name: <br>
+			<input type="text" name="gameName" placeholder="Enter gamer name" required/><br />
 			<input type="submit" name="submit" value="Submit" />
 		</form>
 		</div>
